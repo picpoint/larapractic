@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = [];
+        $categories = Category::paginate(2);
         return view('admin.categories.index', compact('categories'));
     }
 
@@ -58,7 +59,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        return "Page edit";
     }
 
     /**
@@ -81,6 +82,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return "Page delete";
     }
 }

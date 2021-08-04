@@ -37,63 +37,43 @@
                         </button>
                     </div>
                 </div>
+
+                <a href="{{ route('categories.create') }}" class="btn-primary m-2" style="width: 250px; height: 50px; text-align: center">Добавить категорию</a>
+
                 <div class="card-body">
                     <table class="table table-bordered">
                         <thead>
                         <tr>
                             <th style="width: 10px">#</th>
-                            <th>Task</th>
-                            <th>Progress</th>
-                            <th style="width: 40px">Label</th>
+                            <th>Наименование</th>
+                            <th>Slug</th>
+                            <th style="width: 40px">Action</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1.</td>
-                            <td>Update software</td>
+                        @foreach($categories as $category)
+                            <tr>
+                            <td>{{ $category->id }}</td>
+                            <td>{{ $category->title }}</td>
                             <td>
-                                <div class="progress progress-xs">
-                                    <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                                </div>
+                                <span>{{ $category->slug }}</span>
                             </td>
-                            <td><span class="badge bg-danger">55%</span></td>
-                        </tr>
-                        <tr>
-                            <td>2.</td>
-                            <td>Clean database</td>
                             <td>
-                                <div class="progress progress-xs">
-                                    <div class="progress-bar bg-warning" style="width: 70%"></div>
-                                </div>
+                                <a href="{{ route('categories.edit', $category->id) }}"><button type="submit" class="btn-primary"><i class="fas fa-pencil-alt"></i></button></a>
+                                <form action="{{ route('categories.destroy', $category->id) }}" method="post">
+                                    @csrf
+                                    <a href="{{ route('categories.destroy', $category->id) }}"><button type="submit" class="btn-danger"><i class="fas fa-trash-alt"></i></button></a>
+                                    @method('DELETE')
+                                </form>
                             </td>
-                            <td><span class="badge bg-warning">70%</span></td>
                         </tr>
-                        <tr>
-                            <td>3.</td>
-                            <td>Cron job running</td>
-                            <td>
-                                <div class="progress progress-xs progress-striped active">
-                                    <div class="progress-bar bg-primary" style="width: 30%"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge bg-primary">30%</span></td>
-                        </tr>
-                        <tr>
-                            <td>4.</td>
-                            <td>Fix and squish bugs</td>
-                            <td>
-                                <div class="progress progress-xs progress-striped active">
-                                    <div class="progress-bar bg-success" style="width: 90%"></div>
-                                </div>
-                            </td>
-                            <td><span class="badge bg-success">90%</span></td>
-                        </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                    Footer
+                    {{ $categories->links() }}
                 </div>
                 <!-- /.card-footer-->
             </div>
