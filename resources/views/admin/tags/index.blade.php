@@ -44,7 +44,7 @@
                     </div>
                 </div>
 
-                <a href="{{ route('categories.create') }}" class="btn-primary m-2" style="width: 250px; height: 50px; text-align: center">Добавить категорию</a>
+                <a href="{{ route('tags.create') }}" class="btn-primary m-2" style="width: 250px; height: 50px; text-align: center">Добавить тег</a>
 
                 <div class="card-body">
                     <table class="table table-bordered">
@@ -57,18 +57,18 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($categories as $category)
+                        @foreach($tags as $tag)
                             <tr>
-                            <td>{{ $category->id }}</td>
-                            <td>{{ $category->title }}</td>
+                            <td>{{ $tag->id }}</td>
+                            <td>{{ $tag->title }}</td>
                             <td>
-                                <span>{{ $category->slug }}</span>
+                                <span>{{ $tag->slug }}</span>
                             </td>
                             <td>
-                                <a href="{{ route('categories.edit', $category->id) }}"><button type="submit" class="btn-primary"><i class="fas fa-pencil-alt"></i></button></a>
-                                <form action="{{ route('categories.destroy', $category->id) }}" method="post">
+                                <a href="{{ route('tags.edit', $tag->id) }}"><button type="submit" class="btn-primary"><i class="fas fa-pencil-alt"></i></button></a>
+                                <form action="{{ route('tags.destroy', $tag->id) }}" method="post">
                                     @csrf
-                                    <a href="{{ route('categories.destroy', $category->id) }}"><button type="submit" class="btn-danger"><i class="fas fa-trash-alt"></i></button></a>
+                                    <a href="{{ route('tags.destroy', $tag->id) }}"><button type="submit" class="btn-danger"><i class="fas fa-trash-alt"></i></button></a>
                                     @method('DELETE')
                                 </form>
                             </td>
@@ -79,7 +79,7 @@
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                    {{ $categories->links() }}
+                    {{ $tags->links() }}
                 </div>
                 <!-- /.card-footer-->
             </div>

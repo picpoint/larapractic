@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Category;
 use App\Http\Controllers\Controller;
+use App\Post;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::paginate(10);
-        return view('admin.categories.index', compact('categories'));
+        $posts = Post::paginate(10);
+        return view('admin.posts.index', compact('posts'));
     }
 
     /**
@@ -26,7 +26,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.create');
+        return view('admin.posts.create');
     }
 
     /**
@@ -41,11 +41,11 @@ class CategoryController extends Controller
             'title' => 'required'
         ]);
 
-        Category::create($request->all());
+        Post::create($request->all());
 
-        $request->session()->flash('success', 'Категория добавлена');
+        $request->session()->flash('success', 'Пост добавлен');
 
-        return redirect()->route('categories.index');
+        return redirect()->route('posts.index');
     }
 
     /**
@@ -67,9 +67,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::find($id);
+        $post = Post::find($id);
 
-        return view('admin.categories.edit', compact('category'));
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -85,11 +85,11 @@ class CategoryController extends Controller
             'title' => 'required'
         ]);
 
-        $category = Category::find($id);
-        $category->slug = null;
-        $category->update($request->all());
+        $post = Post::find($id);
+        $post->slug = null;
+        $post->update($request->all());
 
-        return redirect()->route('categories.index')->with('success', 'Категория изменена');
+        return redirect()->route('posts.index')->with('success', 'Пост изменён');
 
     }
 
@@ -101,7 +101,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::destroy($id);
-        return redirect()->route('categories.index')->with('success', 'Категория удалена');
+        $post = Post::destroy($id);
+        return redirect()->route('posts.index')->with('success', 'Пост удалён');
     }
 }
