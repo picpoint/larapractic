@@ -52,7 +52,9 @@
                         <tr>
                             <th style="width: 10px">#</th>
                             <th>Наименование</th>
-                            <th>Slug</th>
+                            <th>Категория</th>
+                            <th>Теги</th>
+                            <th>Дата</th>
                             <th style="width: 100px">Action</th>
                         </tr>
                         </thead>
@@ -61,9 +63,10 @@
                             <tr>
                             <td>{{ $post->id }}</td>
                             <td>{{ $post->title }}</td>
-                            <td>
-                                <span>{{ $post->slug }}</span>
-                            </td>
+                            <td>{{ $post->category->title}}</td>
+                            <td>{{ $post->tags }}</td>
+                            <td>{{ $post->created_at }}</td>
+
                             <td>
                                 <a href="{{ route('posts.edit', $post->id) }}"><button type="submit" class="btn-primary"><i class="fas fa-pencil-alt"></i></button></a>
                                 <form action="{{ route('posts.destroy', $post->id) }}" method="post">

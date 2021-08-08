@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\Tag;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -26,7 +28,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('admin.posts.create');
+        $categories = Category::pluck('title', 'id')->all();
+        $tags = Tag::pluck('title', 'id')->all();
+        return view('admin.posts.create', compact('categories', 'tags'));
     }
 
     /**
@@ -38,8 +42,14 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required'
+            'title' => 'required',
+            'description' => 'required',
+            'content' => 'required',
+            'category_id' => 'integer',
+            'thumbnail' => 'nullable|image'
         ]);
+
+        $date = $request->all();
 
         Post::create($request->all());
 
@@ -101,7 +111,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        $post = Post::destroy($id);
+        Post::destroy($id);
         return redirect()->route('posts.index')->with('success', 'Пост удалён');
     }
 }
