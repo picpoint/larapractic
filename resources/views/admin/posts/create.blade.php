@@ -56,7 +56,7 @@
 
                     <div class="form-group">
                         <label for="tags">Теги</label>
-                        <select class="select2" multiple="multiple" name="tags[]" data-placeholder="Выбор тегов" style="width: 100%;" id="tags">
+                        <select class="select2 @error('tags') is-invalid @enderror" multiple="multiple" name="tags[]" data-placeholder="Выбор тегов" style="width: 100%;" id="tags">
                             @foreach($tags as $key => $value)
                                 <option value="{{$key}}">{{ $value }}</option>
                             @endforeach
@@ -67,11 +67,8 @@
                         <label for="thumbnail">Загрузить файл</label>
                         <div class="input-group">
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="thumbnail" name="thumbnail">
+                                <input type="file" class="custom-file-input  @error('thumbnail') is-invalid @enderror" id="thumbnail" name="thumbnail">
                                 <label class="custom-file-label" for="thumbnail">Выбор файла</label>
-                            </div>
-                            <div class="input-group-append">
-                                <span class="input-group-text">Загрузить</span>
                             </div>
                         </div>
                     </div>

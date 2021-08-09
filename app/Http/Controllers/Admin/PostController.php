@@ -45,13 +45,20 @@ class PostController extends Controller
             'title' => 'required',
             'description' => 'required',
             'content' => 'required',
-            'category_id' => 'integer',
-            'thumbnail' => 'nullable|image'
+            'category_id' => 'required|integer',
+            'thumbnail' => 'required|nullable|image'
         ]);
 
-        $date = $request->all();
+        $data = $request->all();
 
-        Post::create($request->all());
+        if ($request->hasFile('thumbnail')) {
+            $folder = date('m-Y');
+            $data['thumbnail'] = $request->file('thumbnail')->store("images/{$folder}");
+        }
+
+        $post = Post::create($data);
+
+        $post->tags()->sync($request->tags);
 
         $request->session()->flash('success', 'Пост добавлен');
 
