@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Post;
 use App\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -46,15 +47,12 @@ class PostController extends Controller
             'description' => 'required',
             'content' => 'required',
             'category_id' => 'required|integer',
-            'thumbnail' => 'required|nullable|image'
+            'thumbnail' => 'nullable|image'
         ]);
 
         $data = $request->all();
 
-        if ($request->hasFile('thumbnail')) {
-            $folder = date('m-Y');
-            $data['thumbnail'] = $request->file('thumbnail')->store("images/{$folder}");
-        }
+        $data['thumbnail'] = Post::uploadImage($request);
 
         $post = Post::create($data);
 
@@ -101,12 +99,26 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required'
+            'title' => 'required',
+            'description' => 'required',
+            'content' => 'required',
+            'category_id' => 'required|integer',
+            'thumbnail' => 'nullable|image'
         ]);
 
         $post = Post::find($id);
-        $post->slug = null;
-        $post->update($request->all());
+        $data = $request->all();
+
+        $data['thumbnail'] = Post::uploadImage($request, $post->thumbnail);
+
+//        if ($request->hasFile('thumbnail')) {
+//            Storage::delete($post->thumbnail);
+//            $folder = date('m-Y');
+//            $data['thumbnail'] = $request->file('thumbnail')->store("image/{$folder}");
+//        }
+
+        $post->update($data);
+        $post->tags()->sync($request->tags);
 
         return redirect()->route('posts.index')->with('success', 'Пост изменён');
 
@@ -120,7 +132,10 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        Post::destroy($id);
+        $post = Post::find($id);
+        $post->tags()->sync([]);
+        Storage::delete($post->thumbnail);
+        $post->delete();
         return redirect()->route('posts.index')->with('success', 'Пост удалён');
     }
 }

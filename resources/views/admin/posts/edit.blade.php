@@ -29,6 +29,7 @@
             <!-- form start -->
             <form action="{{ route('posts.update', ['post' => $post->id]) }}" method="post" role="form" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <div class="card-body">
                     <div class="form-group">
                         <label for="title">Статья {{ $post->title }}</label>
@@ -79,6 +80,7 @@
                                 <label class="custom-file-label" for="thumbnail">Выбор файла</label>
                             </div>
                         </div>
+                        <div><img src="{{ $post->getImage() }}" alt="img" style="width: 250px;"></div>
                     </div>
 
                 </div>
