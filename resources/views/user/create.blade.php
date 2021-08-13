@@ -20,10 +20,20 @@
         </div>
         <div class="card-body">
 
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="list-unstyled">
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <form action="{{ route('register.store') }}" method="post">
                 @csrf
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" name="name" placeholder="Имя">
+                    <input type="text" class="form-control" name="name" placeholder="Имя" value="{{ old('name') }}">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-user"></span>
@@ -31,7 +41,7 @@
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="email" class="form-control" name="email" placeholder="Email">
+                    <input type="email" class="form-control" name="email" placeholder="Email" value="{{ old('email') }}">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-envelope"></span>
@@ -47,7 +57,7 @@
                     </div>
                 </div>
                 <div class="input-group mb-3">
-                    <input type="password_confirmation" class="form-control" placeholder="Подтверждение пароля">
+                    <input type="password" name="password_confirmation" class="form-control" placeholder="Подтверждение пароля">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
