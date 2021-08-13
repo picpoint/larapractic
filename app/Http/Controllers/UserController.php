@@ -33,8 +33,12 @@ class UserController extends Controller
         Auth::login($user);
 
         return redirect()->home();
+    }
 
 
+    public function auth(Request $request)
+    {
+        return view('user.authorize');
     }
 
 
