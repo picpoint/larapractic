@@ -30,7 +30,13 @@
                 </div>
             @endif
 
-            <form action="{{ route('register.store') }}" method="post">
+            @if(session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+            @endif
+
+            <form action="{{ route('login') }}" method="post">
                 @csrf
                 <div class="input-group mb-3">
                     <input type="email" class="form-control" name="email" placeholder="Email" value="{{ old('email') }}">
@@ -47,6 +53,9 @@
                             <span class="fas fa-lock"></span>
                         </div>
                     </div>
+                </div>
+                <div class="col-4">
+                    <button type="submit" class="btn btn-primary btn-block">Login</button>
                 </div>
             </form>
 
