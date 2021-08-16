@@ -10,6 +10,12 @@
     <link rel="stylesheet" href="/public/assets/admin/css/admin.css">
     <!-- Font Awesome -->
 
+    <style>
+        .ck-editor__editable_inline {
+            min-height: 300px;
+        }
+    </style>
+
 </head>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
@@ -296,6 +302,34 @@
 
 
 <script src="/public/assets/admin/js/admin.js"></script>
+<script src="/public/assets/admin/ckeditor5/build/ckeditor.js"></script>
+<script src="/public/assets/admin/ckfinder/ckfinder.js"></script>
+
+<script>
+
+    ClassicEditor
+        .create( document.querySelector( '#content' ), {
+            ckfinder: {
+                uploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json'
+            },
+            toolbar: [ 'ckfinder', 'imageUpload', '|', 'heading', '|', 'bold', 'italic', '|', 'undo', 'redo' ]
+        } )
+        .catch( function( error ) {
+            console.error( error );
+        } );
+
+
+    ClassicEditor
+        .create( document.querySelector( '#description' ), {
+            ckfinder: {
+                uploadUrl: '/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files&responseType=json'
+            },
+            toolbar: [ 'ckfinder', 'imageUpload', '|', 'heading', '|', 'bold', 'italic', '|', 'undo', 'redo' ]
+        } )
+        .catch( function( error ) {
+            console.error( error );
+        } );
+</script>
 
 </body>
 </html>
