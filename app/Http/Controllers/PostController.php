@@ -13,7 +13,7 @@ class PostController extends Controller
 
 
     public function show() {
-        return 'show page';
+        return view('posts.show');
     }
 
 }
