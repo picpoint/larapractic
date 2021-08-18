@@ -68,7 +68,11 @@
 
     @yield('header')
 
-
+    @if(session('error'))
+        <div class="alert alert-danger">
+            session('error')
+        </div>
+    @endif
 
     <section class="section lb">
         <div class="container">
