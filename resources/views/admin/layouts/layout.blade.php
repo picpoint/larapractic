@@ -368,5 +368,11 @@
         } );
 </script>
 
+<script>
+    $(document).ready(function () {
+        bsCustomFileInput.init();
+    });
+</script>
+
 </body>
 </html>
