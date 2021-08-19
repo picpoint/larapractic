@@ -9,10 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 <!-- Site Metas -->
-<title>Markedia - Marketing Blog Template</title>
-<meta name="keywords" content="">
-<meta name="description" content="">
-<meta name="author" content="">
+<title>@yield('title')</title>
 
 <!-- Site Icons -->
 <link rel="shortcut icon" href="/public/assets/front/images/favicon.ico" type="image/x-icon" />
