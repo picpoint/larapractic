@@ -50,8 +50,9 @@
                     <div class="blog-meta big-meta text-center">
                         <h4><a href="marketing-single.html" title="">{{ $post->title }}</a></h4>
                         <p>{!! $post->description !!}</p>
-                        <small><a href="marketing-category.html" title="">{{ $post->category->title }}</a></small>
-                        <small><a href="marketing-single.html" title="">{{ $post->created_at }}</a></small>
+                        {{--<small><a href="{{ route('categories.single', ['slug' => $post->category->slug]) }}" title="">{{ $post->category->title }}</a></small>--}}
+                        <small><a href="#" title="">{{ $post->category->title }}</a></small>
+                        <small><a href="marketing-single.html" title="">{{ $post->getPostDate() }}</a></small>
                         <small><a href="#" title=""><i class="fa fa-eye"></i>{{ $post->views }}</a></small>
                     </div><!-- end meta -->
                 </div><!-- end blog-box -->
@@ -68,9 +69,10 @@
         <div class="col-md-12">
             <nav aria-label="Page navigation">
                 <ul class="pagination justify-content-center">
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    {{ $posts->links() }}
+                    {{--<li class="page-item"><a class="page-link" href="#">1</a></li>--}}
+                    {{--<li class="page-item"><a class="page-link" href="#">2</a></li>--}}
+                    {{--<li class="page-item"><a class="page-link" href="#">3</a></li>--}}
                     <li class="page-item">
                         <a class="page-link" href="#">Next</a>
                     </li>
