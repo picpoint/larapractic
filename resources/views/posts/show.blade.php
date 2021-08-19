@@ -1,33 +1,28 @@
 @extends('layouts.layout')
 
+@section('title', 'Статья поста :: ', $post->tite)
 
 @section('content')
 
     <div class="page-wrapper">
         <div class="blog-title-area">
             <ol class="breadcrumb hidden-xs-down">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Blog</a></li>
-                <li class="breadcrumb-item active">The golden rules you need to know for a positive life</li>
+                <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
+                {{--<li class="breadcrumb-item"><a href="#">{{ $post->category->tite }}</a></li>--}}
+                <li class="breadcrumb-item"><a href="{{ route('categories.single', ['slug' => $post->category->slug]) }}">{{ $post->category->tite }}</a></li>
+                <li class="breadcrumb-item active">{{ $post->title }}</li>
             </ol>
 
-            <span class="color-yellow"><a href="marketing-category.html" title="">Lifestyle</a></span>
+            <span class="color-yellow"><a href="{{ route('categories.single', ['slug' => $post->category->slug]) }}" title="">{{ $post->category->title }}</a></span>
 
-            <h3>The golden rules you need to know for a positive life</h3>
+            <h3>{{ $post->title }}</h3>
 
             <div class="blog-meta big-meta">
-                <small><a href="marketing-single.html" title="">21 July, 2017</a></small>
+                <small>{{ $post->getPostDate() }}</small>
                 <small><a href="blog-author.html" title="">by Jessica</a></small>
                 <small><a href="#" title=""><i class="fa fa-eye"></i> 2344</a></small>
             </div><!-- end meta -->
 
-            <div class="post-sharing">
-                <ul class="list-inline">
-                    <li><a href="#" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Share on Facebook</span></a></li>
-                    <li><a href="#" class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Tweet on Twitter</span></a></li>
-                    <li><a href="#" class="gp-button btn btn-primary"><i class="fa fa-google-plus"></i></a></li>
-                </ul>
-            </div><!-- end post-sharing -->
         </div><!-- end title -->
 
         <div class="single-post-media">
