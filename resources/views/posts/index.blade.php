@@ -48,7 +48,7 @@
                     </div>
                     <!-- end media -->
                     <div class="blog-meta big-meta text-center">
-                        <h4><a href="marketing-single.html" title="">{{ $post->title }}</a></h4>
+                        <h4><a href="#" title="">{{ $post->title }}</a></h4>
                         <p>{!! $post->description !!}</p>
                         {{--<small><a href="{{ route('categories.single', ['slug' => $post->category->slug]) }}" title="">{{ $post->category->title }}</a></small>--}}
                         <small><a href="#" title="">{{ $post->category->title }}</a></small>
